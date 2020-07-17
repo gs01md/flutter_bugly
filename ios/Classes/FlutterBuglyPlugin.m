@@ -68,12 +68,18 @@
       }
       result(nil);
   }else if([@"putUserData" isEqualToString:call.method]){
-      NSString *key = call.arguments[@"key"];
-      NSString *value = call.arguments[@"value"];
-      if (![self isBlankString:key]&&![self isBlankString:value]){
-          [Bugly setUserValue:value forKey:key];
-      }
-      result(nil);
+         NSString *key = call.arguments[@"key"];
+         NSString *value = call.arguments[@"value"];
+         if (![self isBlankString:key]&&![self isBlankString:value]){
+             [Bugly setUserValue:value forKey:key];
+         }
+         result(nil);
+  }else if([@"setAppChannel" isEqualToString:call.method]){
+            NSString *key = call.arguments[@"channel"];
+            if (!key){
+                [Bugly setValue:key forKey:@"channel"];
+            }
+            result(nil);
   }else {
       result(FlutterMethodNotImplemented);
   }
